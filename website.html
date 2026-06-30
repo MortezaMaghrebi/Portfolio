@@ -1,0 +1,1505 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Morteza Maghrebi · Automotive Embedded & R&D Engineer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700;12..96,800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    /* ----- RESET & VARIABLES ----- */
+    * { margin:0; padding:0; box-sizing:border-box; }
+    :root {
+      --ink: #0b0b12;
+      --ink-2: #14131f;
+      --ink-3: #1e1d2b;
+      --violet: #7c5cff;
+      --coral: #ff5470;
+      --lime: #d4ff3d;
+      --paper: #f4f2ec;
+      --paper-dim: #b8b4a6;
+      --line: rgba(244,242,236,0.10);
+      --shadow: 0 20px 40px -12px rgba(0,0,0,0.8);
+      --radius: 24px;
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--ink);
+      color: var(--paper);
+      font-family: 'Inter', sans-serif;
+      overflow-x: hidden;
+      line-height: 1.5;
+    }
+    ::selection { background: var(--violet); color: var(--ink); }
+    a { color: inherit; text-decoration: none; }
+    .mono { font-family: 'JetBrains Mono', monospace; }
+    img { display: block; max-width: 100%; }
+
+    /* scrollbar */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--ink); }
+    ::-webkit-scrollbar-thumb { background: var(--violet); border-radius: 12px; }
+
+    /* ----- GRAIN & CURSOR (light) ----- */
+    .grain {
+      position: fixed; inset: 0; z-index: 5; pointer-events: none; opacity: 0.03;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    }
+    .cursor { display: none; }
+
+    /* ----- TOPBAR ----- */
+    .topbar {
+      position: fixed; top:0; left:0; right:0; z-index: 200;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 20px 5vw;
+      background: rgba(11,11,18,0.75); backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--line);
+    }
+    .logo {
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-weight: 800; font-size: 22px; letter-spacing: -0.02em;
+    }
+    .logo span { color: var(--violet); }
+    .nav-links {
+      display: flex; gap: 28px; font-size: 13px;
+      font-weight: 500; letter-spacing: 0.02em;
+    }
+    .nav-links a { transition: color 0.3s; }
+    .nav-links a:hover { color: var(--violet); }
+    .nav-actions { display: flex; gap: 14px; align-items: center; }
+    .icon-btn {
+      background: none; border: none; color: var(--paper);
+      font-size: 18px; cursor: pointer; transition: 0.3s;
+    }
+    .icon-btn:hover { color: var(--violet); transform: scale(1.05); }
+    @media (max-width: 760px) {
+      .nav-links { display: none; }
+      .topbar { padding: 14px 5vw; }
+    }
+
+    /* ----- HERO (cinematic) ----- */
+    .hero {
+      min-height: 100vh; display: flex; flex-direction: column; justify-content: center;
+      padding: 120px 5vw 60px; position: relative;
+      background: radial-gradient(ellipse at 20% 30%, #1c1a3a 0%, var(--ink) 80%);
+      border-bottom: 1px solid var(--line);
+    }
+    .hero-badge {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px; letter-spacing: 0.2em; color: var(--lime);
+      display: flex; align-items: center; gap: 12px; margin-bottom: 24px;
+    }
+    .hero-badge .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--lime); animation: pulse 2s infinite; }
+    @keyframes pulse { 0%,100%{ opacity:1; } 50%{ opacity:0.2; } }
+
+    .hero h1 {
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-weight: 800; font-size: clamp(44px, 9vw, 110px);
+      line-height: 0.94; letter-spacing: -0.03em;
+      max-width: 900px;
+    }
+    .hero h1 .hl { color: var(--violet); }
+    .hero h1 .hl2 { color: var(--coral); }
+    .hero p {
+      max-width: 540px; font-size: 18px; color: var(--paper-dim);
+      margin: 28px 0 40px; line-height: 1.7;
+    }
+    .hero-actions { display: flex; gap: 20px; flex-wrap: wrap; }
+    .btn {
+      padding: 14px 32px; border-radius: 100px; font-weight: 600;
+      border: none; font-family: 'Inter', sans-serif;
+      transition: 0.3s; cursor: pointer; font-size: 14px;
+      display: inline-flex; align-items: center; gap: 10px;
+    }
+    .btn-primary { background: var(--violet); color: var(--paper); }
+    .btn-primary:hover { background: #6a4ae0; transform: scale(1.02); box-shadow: 0 0 20px rgba(124,92,255,0.3); }
+    .btn-outline { background: transparent; border: 1px solid var(--paper); color: var(--paper); }
+    .btn-outline:hover { background: var(--paper); color: var(--ink); }
+
+    .hero-stats {
+      display: flex; gap: 48px; margin-top: 56px;
+      border-top: 1px solid var(--line); padding-top: 28px;
+    }
+    .stat .num { font-family: 'Bricolage Grotesque', sans-serif; font-weight: 700; font-size: 30px; }
+    .stat .lbl { font-size: 12px; color: var(--paper-dim); letter-spacing: 0.05em; }
+
+    /* ----- 3D DNA (enhanced starfield) ----- */
+    .orbit-section {
+      position: relative; height: 320vh; background: var(--ink);
+      border-bottom: 1px solid var(--line);
+    }
+    .orbit-sticky {
+      position: sticky; top: 0; height: 100vh; overflow: hidden;
+      display: flex; align-items: center; justify-content: center;
+    }
+    #dna-canvas {
+      position: absolute; inset: 0; display: block; width: 100%; height: 100%;
+      background: radial-gradient(circle at center, #0f0e1a 0%, #05050a 100%);
+    }
+    .orbit-overlay {
+      position: absolute; inset: 0; z-index: 3; pointer-events: none;
+      display: flex; flex-direction: column; justify-content: space-between;
+      padding: 120px 5vw 60px;
+    }
+    .orbit-overlay .section-tag { pointer-events: auto; color: var(--lime); }
+    .orbit-heading {
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-weight: 700; font-size: clamp(24px, 4vw, 48px);
+      max-width: 560px; line-height: 1.1;
+    }
+    .orbit-heading span { color: var(--violet); }
+    .orbit-foot {
+      display: flex; justify-content: space-between;
+      font-family: 'JetBrains Mono', monospace; font-size: 12px;
+      color: var(--paper-dim); letter-spacing: 0.08em;
+    }
+    .orbit-progress {
+      width: 160px; height: 2px; background: var(--line); position: relative; overflow: hidden;
+    }
+    .orbit-progress i {
+      position: absolute; left:0; top:0; height:100%; width:0%;
+      background: var(--lime); display: block;
+    }
+    .orbit-vignette {
+      position: absolute; inset:0; z-index:2; pointer-events:none;
+      background: radial-gradient(ellipse at center, rgba(11,11,18,0) 30%, rgba(11,11,18,0.85) 100%);
+    }
+
+    /* ----- SECTION SHELL ----- */
+    section { padding: 100px 5vw; position: relative; }
+    .section-head {
+      display: flex; justify-content: space-between; align-items: flex-end;
+      margin-bottom: 56px; gap: 32px; flex-wrap: wrap;
+      border-bottom: 1px solid var(--line); padding-bottom: 28px;
+    }
+    .section-tag {
+      font-family: 'JetBrains Mono', monospace; font-size: 12px;
+      letter-spacing: 0.15em; color: var(--violet); display: block; margin-bottom: 12px;
+    }
+    .section-title {
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-weight: 700; font-size: clamp(32px, 4.6vw, 56px);
+      letter-spacing: -0.02em; line-height: 1.05;
+    }
+    .section-desc { max-width: 380px; color: var(--paper-dim); font-size: 15px; line-height: 1.7; }
+
+    /* ----- ENGINEERING SERVICES (updated with new skills) ----- */
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 24px;
+      margin-top: 10px;
+    }
+
+    .service-card {
+      background: var(--ink-2);
+      border-radius: var(--radius);
+      padding: 28px 24px;
+      border: 1px solid var(--line);
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .service-card::before {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: var(--violet);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.4s ease;
+    }
+
+    .service-card:hover {
+      transform: translateY(-8px);
+      border-color: var(--violet);
+      box-shadow: 0 12px 40px rgba(124, 92, 255, 0.15);
+    }
+
+    .service-card:hover::before {
+      transform: scaleX(1);
+    }
+
+    .service-icon {
+      font-size: 2.2rem;
+      color: var(--violet);
+      margin-bottom: 16px;
+      display: inline-block;
+      background: rgba(124, 92, 255, 0.08);
+      padding: 12px;
+      border-radius: 14px;
+      line-height: 1;
+    }
+
+    .service-card h3 {
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin-bottom: 10px;
+      color: var(--paper);
+    }
+
+    .service-card p {
+      color: var(--paper-dim);
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+
+    .service-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 14px;
+    }
+
+    .service-tag {
+      background: rgba(124, 92, 255, 0.06);
+      border: 1px solid rgba(124, 92, 255, 0.12);
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      color: var(--violet);
+      font-weight: 500;
+      letter-spacing: 0.3px;
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .service-highlight {
+      margin-top: 30px;
+      padding: 18px 24px;
+      background: rgba(124, 92, 255, 0.05);
+      border-radius: 12px;
+      border-left: 4px solid var(--violet);
+    }
+
+    .service-highlight p {
+      color: var(--paper-dim);
+      font-size: 0.95rem;
+    }
+
+    .service-highlight i {
+      color: var(--violet);
+      margin-right: 12px;
+    }
+
+    /* ----- SHOP / STORE (new) ----- */
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 24px;
+      margin-top: 20px;
+    }
+
+    .product-card {
+      background: var(--ink-2);
+      border-radius: var(--radius);
+      border: 1px solid var(--line);
+      padding: 20px;
+      transition: 0.3s;
+      position: relative;
+    }
+
+    .product-card:hover {
+      transform: translateY(-6px);
+      border-color: var(--violet);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.6);
+    }
+
+    .product-img {
+      background: linear-gradient(145deg, #1e1d2b, #13121e);
+      border-radius: 16px;
+      height: 160px;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 42px;
+      color: var(--paper-dim);
+    }
+
+    .product-category {
+      font-size: 11px;
+      color: var(--violet);
+      letter-spacing: 0.08em;
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .product-name {
+      font-weight: 600;
+      font-size: 17px;
+      margin: 4px 0 8px;
+    }
+
+    .product-price {
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--lime);
+    }
+
+    .product-rating {
+      font-size: 13px;
+      color: var(--paper-dim);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin: 6px 0 12px;
+    }
+
+    .btn-add {
+      background: var(--violet);
+      border: none;
+      color: var(--paper);
+      padding: 10px 0;
+      border-radius: 100px;
+      font-weight: 600;
+      width: 100%;
+      cursor: pointer;
+      transition: 0.3s;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .btn-add:hover {
+      background: #6a4ae0;
+    }
+
+    /* ----- UPLOAD SECTION (STL/DXF) ----- */
+    .upload-section {
+      background: var(--ink-2);
+      border-radius: var(--radius);
+      padding: 40px;
+      border: 2px dashed var(--violet);
+      margin-top: 30px;
+      text-align: center;
+      transition: 0.3s;
+    }
+
+    .upload-section:hover {
+      border-color: var(--lime);
+      background: rgba(124, 92, 255, 0.05);
+    }
+
+    .upload-section .upload-icon {
+      font-size: 48px;
+      color: var(--violet);
+      margin-bottom: 16px;
+    }
+
+    .upload-section h3 {
+      font-size: 24px;
+      font-weight: 700;
+      margin-bottom: 8px;
+      color: var(--paper);
+    }
+
+    .upload-section p {
+      color: var(--paper-dim);
+      margin-bottom: 20px;
+    }
+
+    .upload-area {
+      border: 2px dashed var(--line);
+      border-radius: 16px;
+      padding: 40px;
+      transition: 0.3s;
+      cursor: pointer;
+    }
+
+    .upload-area:hover {
+      border-color: var(--violet);
+      background: rgba(124, 92, 255, 0.03);
+    }
+
+    .upload-area .file-types {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 12px;
+    }
+
+    .file-type-badge {
+      background: rgba(124, 92, 255, 0.08);
+      border: 1px solid rgba(124, 92, 255, 0.15);
+      padding: 6px 16px;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-family: 'JetBrains Mono', monospace;
+      color: var(--violet);
+    }
+
+    .upload-actions {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      margin-top: 20px;
+      flex-wrap: wrap;
+    }
+
+    /* ----- PROJECTS (accordion style) ----- */
+    .projects-accordion {
+      margin-top: 20px;
+    }
+
+    .accordion-item {
+      background: var(--ink-2);
+      border-radius: 12px;
+      margin-bottom: 16px;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      transition: var(--transition);
+    }
+
+    .accordion-item.active {
+      border-color: var(--violet);
+      box-shadow: 0 5px 20px rgba(124, 92, 255, 0.15);
+    }
+
+    .accordion-header {
+      padding: 20px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      background: rgba(15, 20, 35, 0.8);
+      transition: background 0.3s;
+    }
+
+    .accordion-header:hover {
+      background: rgba(124, 92, 255, 0.05);
+    }
+
+    .accordion-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--accent-blue);
+    }
+
+    .accordion-date {
+      font-size: 0.85rem;
+      color: var(--coral);
+      font-weight: 600;
+      background: rgba(255, 84, 112, 0.1);
+      padding: 4px 12px;
+      border-radius: 20px;
+      white-space: nowrap;
+    }
+
+    .accordion-toggle {
+      color: var(--violet);
+      font-size: 1.1rem;
+      transition: transform 0.3s;
+    }
+
+    .accordion-item.active .accordion-toggle {
+      transform: rotate(180deg);
+    }
+
+    .accordion-content {
+      padding: 0 24px;
+      max-height: 0;
+      overflow: hidden;
+      transition: all 0.5s ease;
+    }
+
+    .accordion-item.active .accordion-content {
+      padding: 20px 24px;
+      max-height: 1000px;
+    }
+
+    .accordion-tech {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+
+    .tech-tag {
+      background: rgba(124, 92, 255, 0.08);
+      padding: 4px 12px;
+      border-radius: 4px;
+      font-size: 0.8rem;
+      color: var(--violet);
+      font-weight: 500;
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .accordion-description {
+      line-height: 1.6;
+      color: var(--text-secondary);
+    }
+
+    .accordion-description ul {
+      margin-left: 20px;
+      margin-top: 10px;
+      list-style: none;
+    }
+
+    .accordion-description li {
+      margin-bottom: 8px;
+      position: relative;
+      padding-left: 16px;
+      color: var(--paper-dim);
+    }
+
+    .accordion-description li::before {
+      content: '▸';
+      color: var(--violet);
+      position: absolute;
+      left: -4px;
+      font-weight: bold;
+    }
+
+    /* ----- RESUME HIGHLIGHTS ----- */
+    .resume-highlights {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 16px;
+      margin: 20px 0 10px;
+    }
+
+    .highlight-item {
+      background: rgba(0, 0, 0, 0.25);
+      padding: 16px 20px;
+      border-radius: 12px;
+      border-left: 3px solid var(--violet);
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      transition: var(--transition);
+    }
+
+    .highlight-item:hover {
+      background: rgba(124, 92, 255, 0.06);
+      transform: translateX(4px);
+    }
+
+    .highlight-icon {
+      color: var(--violet);
+      font-size: 1.2rem;
+      width: 28px;
+      text-align: center;
+    }
+
+    .highlight-text {
+      font-size: 0.95rem;
+      font-weight: 500;
+    }
+
+    .highlight-text small {
+      display: block;
+      color: var(--paper-dim);
+      font-weight: 400;
+      font-size: 0.8rem;
+      margin-top: 2px;
+    }
+
+    /* ----- CTA contact ----- */
+    .contact-cta {
+      background: var(--violet);
+      border-radius: var(--radius);
+      padding: 60px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 24px;
+      margin-top: 40px;
+    }
+    .contact-cta h2 { font-size: 30px; font-weight: 700; color: var(--ink); }
+    .contact-cta .btn { background: var(--ink); color: var(--paper); border: none; }
+    .contact-cta .btn:hover { background: var(--paper); color: var(--ink); }
+
+    /* FOOTER */
+    footer {
+      background: var(--ink-2);
+      padding: 40px 5vw 24px;
+      border-top: 1px solid var(--line);
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 20px;
+      font-size: 13px;
+      color: var(--paper-dim);
+    }
+    footer .highlight { color: var(--violet); font-weight: 600; }
+
+    /* REVEAL */
+    .reveal { opacity:0; transform: translateY(30px); transition: opacity 0.8s, transform 0.8s; }
+    .reveal.in { opacity:1; transform: translateY(0); }
+
+    /* responsive */
+    @media (max-width: 700px) {
+      .hero-stats { flex-wrap: wrap; gap: 24px; }
+      .services-grid { grid-template-columns: 1fr; }
+      .resume-highlights { grid-template-columns: 1fr; }
+      .product-grid { grid-template-columns: 1fr 1fr; }
+      .upload-section { padding: 24px; }
+    }
+  </style>
+</head>
+<body>
+<div class="grain"></div>
+
+<!-- TOPBAR -->
+<header class="topbar">
+  <a href="#" class="logo">MORTEZA<span>M</span></a>
+  <div class="nav-links">
+    <a href="#services">Services</a>
+    <a href="#shop">Shop</a>
+    <a href="#upload">Upload</a>
+    <a href="#projects">Projects</a>
+    <a href="#resume">Resume</a>
+    <a href="#contact">Contact</a>
+  </div>
+  <div class="nav-actions">
+    <button class="icon-btn">🔍</button>
+    <button class="icon-btn">🛒</button>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-badge"><span class="dot"></span> AUTOMOTIVE · EMBEDDED · R&D</div>
+  <h1>
+    <span class="hl">Morteza</span> <span class="hl2">Maghrebi</span><br>
+    Engineering <span class="hl">precision</span>
+  </h1>
+  <p>Automotive Embedded Systems & R&D Engineer with 5+ years of experience in digital instrument clusters, CAN bus systems, bootloaders, and industrial hardware development. From PCB design to full-stack embedded solutions.</p>
+  <div class="hero-actions">
+    <a href="#services" class="btn btn-primary">Explore Services →</a>
+    <a href="#projects" class="btn btn-outline">View Projects</a>
+  </div>
+  <div class="hero-stats">
+    <div class="stat"><span class="num">5+</span><span class="lbl">YEARS EXPERIENCE</span></div>
+    <div class="stat"><span class="num">30+</span><span class="lbl">PROJECTS SHIPPED</span></div>
+    <div class="stat"><span class="num">100%</span><span class="lbl">SUCCESS RATE</span></div>
+  </div>
+</section>
+
+<!-- DNA ORBIT (3D + stars) -->
+<section class="orbit-section" id="orbit">
+  <div class="orbit-sticky">
+    <canvas id="dna-canvas"></canvas>
+    <div class="orbit-vignette"></div>
+    <div class="orbit-overlay">
+      <div>
+        <span class="section-tag mono">SYSTEM / THE PROCESS</span>
+        <h2 class="orbit-heading">Every project is engineered with <span>precision, passion & purpose</span> — from concept to production.</h2>
+      </div>
+      <div class="orbit-foot">
+        <span>SCROLL TO EXPLORE</span>
+        <div class="orbit-progress"><i id="orbitProgressBar"></i></div>
+        <span id="orbitCount">01 / 12</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ENGINEERING SERVICES (updated with Android, C#, Qt) -->
+<section id="services" style="background: var(--ink-2);">
+  <div class="section-head">
+    <div>
+      <span class="section-tag">ENGINEERING SERVICES</span>
+      <h2 class="section-title">Full-cycle development — from concept to production.</h2>
+    </div>
+    <p class="section-desc">PCB design, embedded firmware, 3D printing, CAD, reverse engineering, and complete electromechanical solutions.</p>
+  </div>
+
+  <div class="services-grid">
+    <div class="service-card">
+      <div class="service-icon"><i class="fas fa-microchip"></i></div>
+      <h3>PCB Design & Electronics</h3>
+      <p>Custom PCB layout, schematic design, and prototyping. Expertise in high-speed digital, mixed-signal, and power electronics.</p>
+      <div class="service-tags">
+        <span class="service-tag">Altium Designer</span>
+        <span class="service-tag">KiCad</span>
+        <span class="service-tag">STM32</span>
+        <span class="service-tag">ESP32</span>
+      </div>
+    </div>
+
+    <div class="service-card">
+      <div class="service-icon"><i class="fas fa-code"></i></div>
+      <h3>Firmware & Embedded Software</h3>
+      <p>Bare-metal, RTOS, and Linux-based embedded development. Bootloaders, CAN, UART, SPI, I2C, and custom communication stacks.</p>
+      <div class="service-tags">
+        <span class="service-tag">C/C++</span>
+        <span class="service-tag">STM32Cube</span>
+        <span class="service-tag">Zephyr</span>
+        <span class="service-tag">FreeRTOS</span>
+      </div>
+    </div>
+
+    <div class="service-card">
+      <div class="service-icon"><i class="fas fa-cube"></i></div>
+      <h3>3D Printing & CAD</h3>
+      <p>Mechanical design, CAD modeling, and functional prototyping using FDM/resin printing. Optimized for strength, weight, and production.</p>
+      <div class="service-tags">
+        <span class="service-tag">SolidWorks</span>
+        <span class="service-tag">Fusion 360</span>
+        <span class="service-tag">STL / STEP</span>
+        <span class="service-tag">DFM</span>
+      </div>
+    </div>
+
+    <div class="service-card">
+      <div class="service-icon"><i class="fas fa-rotate-left"></i></div>
+      <h3>Reverse Engineering</h3>
+      <p>Complete electromechanical reverse engineering: PCB extraction, firmware analysis, protocol decoding, and component-level teardown.</p>
+      <div class="service-tags">
+        <span class="service-tag">Logic Analyzer</span>
+        <span class="service-tag">CAN / LIN</span>
+        <span class="service-tag">JTAG/SWD</span>
+        <span class="service-tag">Firmware Dump</span>
+      </div>
+    </div>
+
+    <div class="service-card">
+      <div class="service-icon"><i class="fas fa-car"></i></div>
+      <h3>Automotive Embedded Systems</h3>
+      <p>Digital instrument clusters, CAN bus networks, bootloader development, diagnostic tools, and production test systems.</p>
+      <div class="service-tags">
+        <span class="service-tag">ISO 14229 (UDS)</span>
+        <span class="service-tag">CANoe</span>
+        <span class="service-tag">Qt / Linux</span>
+        <span class="service-tag">Vector</span>
+      </div>
+    </div>
+
+    <div class="service-card">
+      <div class="service-icon"><i class="fas fa-fire"></i></div>
+      <h3>Laser Engraving & Cutting</h3>
+      <p>Precision laser cutting and engraving for panels, enclosures, and custom parts. Support for DXF, SVG, and AI files.</p>
+      <div class="service-tags">
+        <span class="service-tag">CO2 Laser</span>
+        <span class="service-tag">Fiber Laser</span>
+        <span class="service-tag">Acrylic / Wood</span>
+        <span class="service-tag">Metal</span>
+      </div>
+    </div>
+
+    <!-- NEW: Android Development -->
+    <div class="service-card">
+      <div class="service-icon"><i class="fab fa-android"></i></div>
+      <h3>Android App Development</h3>
+      <p>Native Android applications with TCP/UDP networking, multithreading, and hardware integration. Custom IoT and communication apps.</p>
+      <div class="service-tags">
+        <span class="service-tag">Java</span>
+        <span class="service-tag">Kotlin</span>
+        <span class="service-tag">Sockets</span>
+        <span class="service-tag">Bluetooth</span>
+        <span class="service-tag">USB</span>
+      </div>
+    </div>
+
+    <!-- NEW: C# Development -->
+    <div class="service-card">
+      <div class="service-icon"><i class="fas fa-windows"></i></div>
+      <h3>C# & .NET Development</h3>
+      <p>Desktop applications, DLLs, MVVM architecture, and hardware communication. Production line software and test automation systems.</p>
+      <div class="service-tags">
+        <span class="service-tag">C#</span>
+        <span class="service-tag">.NET</span>
+        <span class="service-tag">MVVM</span>
+        <span class="service-tag">WPF</span>
+        <span class="service-tag">WinForms</span>
+      </div>
+    </div>
+
+    <!-- NEW: Qt Development -->
+    <div class="service-card">
+      <div class="service-icon"><i class="fas fa-desktop"></i></div>
+      <h3>Qt & QML Development</h3>
+      <p>Cross-platform applications with Qt/QML. Automotive instrument cluster UI, Linux-based GUI, and embedded touch interfaces.</p>
+      <div class="service-tags">
+        <span class="service-tag">Qt</span>
+        <span class="service-tag">QML</span>
+        <span class="service-tag">C++</span>
+        <span class="service-tag">Linux</span>
+        <span class="service-tag">Embedded</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="service-highlight">
+    <p><i class="fas fa-tools"></i> <strong>End-to-end capability:</strong> From concept and PCB design to embedded firmware, 3D-printed enclosures, Android apps, C# desktop software, Qt GUIs, and production test systems — I deliver complete electromechanical and software solutions.</p>
+  </div>
+</section>
+
+<!-- SHOP / STORE -->
+<section id="shop">
+  <div class="section-head">
+    <div>
+      <span class="section-tag">SHOP</span>
+      <h2 class="section-title">Products engineered with precision.</h2>
+    </div>
+    <p class="section-desc">3D printed parts, electronics kits, and custom gadgets — all designed and built in-house.</p>
+  </div>
+
+  <div class="product-grid" id="productGrid">
+    <!-- Products will be injected by JavaScript -->
+  </div>
+</section>
+
+<!-- UPLOAD SECTION (STL/DXF for 3D printing & laser engraving) -->
+<section id="upload" style="background: var(--ink-2);">
+  <div class="section-head">
+    <div>
+      <span class="section-tag">UPLOAD & ORDER</span>
+      <h2 class="section-title">Get your designs printed or engraved.</h2>
+    </div>
+    <p class="section-desc">Upload STL files for 3D printing or DXF/SVG for laser engraving. Get a quote and track your order.</p>
+  </div>
+
+  <div class="upload-section">
+    <div class="upload-icon"><i class="fas fa-cloud-upload-alt"></i></div>
+    <h3>Upload Your Files</h3>
+    <p>Drag and drop your 3D models or vector files, or click to browse</p>
+
+    <div class="upload-area">
+      <div style="font-size: 48px; color: var(--violet); margin-bottom: 12px;"><i class="fas fa-file-upload"></i></div>
+      <p style="font-size: 1.1rem; font-weight: 600;">Drop files here or click to upload</p>
+      <div class="file-types">
+        <span class="file-type-badge">.STL</span>
+        <span class="file-type-badge">.STEP</span>
+        <span class="file-type-badge">.DXF</span>
+        <span class="file-type-badge">.SVG</span>
+        <span class="file-type-badge">.AI</span>
+        <span class="file-type-badge">.OBJ</span>
+        <span class="file-type-badge">.3MF</span>
+      </div>
+    </div>
+
+    <div style="margin-top: 24px;">
+      <h4 style="color: var(--paper); margin-bottom: 12px;">Order Specifications</h4>
+      <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 12px;">
+        <div>
+          <label style="display: block; font-size: 0.8rem; color: var(--paper-dim); margin-bottom: 4px;">Material</label>
+          <select style="width: 100%; padding: 10px 12px; background: var(--ink); border: 1px solid var(--line); border-radius: 10px; color: var(--paper); font-family: 'Inter', sans-serif;">
+            <option>PLA (Standard)</option>
+            <option>PETG</option>
+            <option>ABS</option>
+            <option>Nylon</option>
+            <option>Resin</option>
+            <option>Carbon Fiber</option>
+            <option>Acrylic (Laser)</option>
+            <option>Wood (Laser)</option>
+            <option>Metal (Laser)</option>
+          </select>
+        </div>
+        <div>
+          <label style="display: block; font-size: 0.8rem; color: var(--paper-dim); margin-bottom: 4px;">Quantity</label>
+          <input type="number" value="1" min="1" style="width: 100%; padding: 10px 12px; background: var(--ink); border: 1px solid var(--line); border-radius: 10px; color: var(--paper); font-family: 'Inter', sans-serif;">
+        </div>
+        <div>
+          <label style="display: block; font-size: 0.8rem; color: var(--paper-dim); margin-bottom: 4px;">Color</label>
+          <input type="text" placeholder="e.g. Black, White" style="width: 100%; padding: 10px 12px; background: var(--ink); border: 1px solid var(--line); border-radius: 10px; color: var(--paper); font-family: 'Inter', sans-serif;">
+        </div>
+        <div>
+          <label style="display: block; font-size: 0.8rem; color: var(--paper-dim); margin-bottom: 4px;">Service Type</label>
+          <select style="width: 100%; padding: 10px 12px; background: var(--ink); border: 1px solid var(--line); border-radius: 10px; color: var(--paper); font-family: 'Inter', sans-serif;">
+            <option>3D Printing</option>
+            <option>Laser Engraving</option>
+            <option>Laser Cutting</option>
+            <option>CNC Machining</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <div class="upload-actions">
+      <button class="btn btn-primary" style="padding: 14px 40px;"><i class="fas fa-calculator"></i> Get Instant Quote</button>
+      <button class="btn btn-outline" style="padding: 14px 40px;"><i class="fas fa-paper-plane"></i> Submit Order</button>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS (Accordion) -->
+<section id="projects">
+  <div class="section-head">
+    <div>
+      <span class="section-tag">PROJECT PORTFOLIO</span>
+      <h2 class="section-title">Engineering projects I've delivered.</h2>
+    </div>
+    <p class="section-desc">From digital instrument clusters to reverse engineering — each project is built with precision.</p>
+  </div>
+
+  <div class="projects-accordion">
+    <!-- Project 1 -->
+    <div class="accordion-item active">
+      <div class="accordion-header">
+        <div>
+          <div class="accordion-title">Digital Instrument Cluster – Dena Vehicle</div>
+          <div class="accordion-date">Lead Engineer</div>
+        </div>
+        <div class="accordion-toggle"><i class="fas fa-chevron-down"></i></div>
+      </div>
+      <div class="accordion-content">
+        <div class="accordion-tech">
+          <span class="tech-tag">STM32</span>
+          <span class="tech-tag">CAN</span>
+          <span class="tech-tag">C</span>
+          <span class="tech-tag">Qt</span>
+          <span class="tech-tag">Linux</span>
+        </div>
+        <div class="accordion-description">
+          <ul>
+            <li>Programmed low-level hardware layer for a new automotive microcontroller using direct register-level coding</li>
+            <li>Developed custom HAL (Hardware Abstraction Layer) for the MCU</li>
+            <li>Implemented CAN-based firmware update via diagnostic tools</li>
+            <li>Designed and developed cluster bootloader, Windows PC update software, standalone SD-card-based MCU updater</li>
+            <li>Led Linux-based UI development using Qt and designed UI graphics using GIMP</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Project 2 -->
+    <div class="accordion-item">
+      <div class="accordion-header">
+        <div>
+          <div class="accordion-title">Dual-Bus CAN Analyzer + C# Application</div>
+          <div class="accordion-date">Full Development</div>
+        </div>
+        <div class="accordion-toggle"><i class="fas fa-chevron-down"></i></div>
+      </div>
+      <div class="accordion-content">
+        <div class="accordion-tech">
+          <span class="tech-tag">CAN</span>
+          <span class="tech-tag">C#</span>
+          <span class="tech-tag">Embedded</span>
+          <span class="tech-tag">Diagnostics</span>
+        </div>
+        <div class="accordion-description">
+          <ul>
+            <li>Designed and built a CAN bus analyzer hardware and PC software</li>
+            <li>Simultaneous support for MS-CAN (125 kb/s) and HS-CAN (500 kb/s)</li>
+            <li>Reliable communication under maximum network load</li>
+            <li>Real-time monitoring of messages, hardware errors, acknowledgements, and bus states</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Project 3 -->
+    <div class="accordion-item">
+      <div class="accordion-header">
+        <div>
+          <div class="accordion-title">Sensor Calibration Production Line</div>
+          <div class="accordion-date">2019-2021</div>
+        </div>
+        <div class="accordion-toggle"><i class="fas fa-chevron-down"></i></div>
+      </div>
+      <div class="accordion-content">
+        <div class="accordion-tech">
+          <span class="tech-tag">C#</span>
+          <span class="tech-tag">Embedded</span>
+          <span class="tech-tag">Automation</span>
+        </div>
+        <div class="accordion-description">
+          <p>Developed hardware and software for pressure sensor calibration production line with full automation and quality control. System archives default sensor data, writes new calibration values, and performs testing with standard classification of all information.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Project 4 -->
+    <div class="accordion-item">
+      <div class="accordion-header">
+        <div>
+          <div class="accordion-title">VANET Vehicle Network Simulation</div>
+          <div class="accordion-date">C++ Simulation</div>
+        </div>
+        <div class="accordion-toggle"><i class="fas fa-chevron-down"></i></div>
+      </div>
+      <div class="accordion-content">
+        <div class="accordion-tech">
+          <span class="tech-tag">C++</span>
+          <span class="tech-tag">Networking</span>
+          <span class="tech-tag">802.11p</span>
+        </div>
+        <div class="accordion-description">
+          <p>Simulated vehicular ad-hoc network where packets are passed between vehicles to reach destination using 802.11p and GPS. Implemented packet forwarding algorithm based on vehicle proximity and direction. Simulated highway scenarios with varying vehicle density and speed.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Project 5 -->
+    <div class="accordion-item">
+      <div class="accordion-header">
+        <div>
+          <div class="accordion-title">Linux Board Programmer – i.MX6UL</div>
+          <div class="accordion-date">Rey Vehicle Project</div>
+        </div>
+        <div class="accordion-toggle"><i class="fas fa-chevron-down"></i></div>
+      </div>
+      <div class="accordion-content">
+        <div class="accordion-tech">
+          <span class="tech-tag">Linux</span>
+          <span class="tech-tag">i.MX6UL</span>
+          <span class="tech-tag">Embedded</span>
+        </div>
+        <div class="accordion-description">
+          <ul>
+            <li>Developed an automated Linux-based board programming system</li>
+            <li>System boots from SD card and automatically programs the core board</li>
+            <li>Copies OS from flash memory with zero operator intervention</li>
+            <li>Implemented progress display for programming status</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Project 6 -->
+    <div class="accordion-item">
+      <div class="accordion-header">
+        <div>
+          <div class="accordion-title">Delta 3D Printer & Laser Engraver</div>
+          <div class="accordion-date">Mechanical & Embedded Design</div>
+        </div>
+        <div class="accordion-toggle"><i class="fas fa-chevron-down"></i></div>
+      </div>
+      <div class="accordion-content">
+        <div class="accordion-tech">
+          <span class="tech-tag">3D Printer</span>
+          <span class="tech-tag">Marlin</span>
+          <span class="tech-tag">Laser</span>
+          <span class="tech-tag">Mechanical Design</span>
+        </div>
+        <div class="accordion-description">
+          <ul>
+            <li>Designed and built a high-precision delta 3D printer with Marlin firmware</li>
+            <li>Designed and built a laser engraving and cutting machine with fully aluminum mechanical structure</li>
+            <li>Solved advanced mechanical accuracy challenges</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- NEW: Android App -->
+    <div class="accordion-item">
+      <div class="accordion-header">
+        <div>
+          <div class="accordion-title">Smart Parking Door Control – Android App</div>
+          <div class="accordion-date">Android & Embedded</div>
+        </div>
+        <div class="accordion-toggle"><i class="fas fa-chevron-down"></i></div>
+      </div>
+      <div class="accordion-content">
+        <div class="accordion-tech">
+          <span class="tech-tag">Android</span>
+          <span class="tech-tag">Java</span>
+          <span class="tech-tag">STM32</span>
+          <span class="tech-tag">SMS Encryption</span>
+        </div>
+        <div class="accordion-description">
+          <ul>
+            <li>Developed Android app for smart parking door control</li>
+            <li>Implemented SMS encryption for secure communication</li>
+            <li>Programmed STM32 microcontroller to work with Android app</li>
+            <li>Regular user and admin management via app interface</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RESUME HIGHLIGHTS -->
+<section id="resume" style="background: var(--ink-2);">
+  <div class="section-head">
+    <div>
+      <span class="section-tag">RESUME HIGHLIGHTS</span>
+      <h2 class="section-title">5+ years of R&D and embedded engineering experience.</h2>
+    </div>
+    <p class="section-desc">Automotive, industrial, and consumer products — from concept to production.</p>
+  </div>
+
+  <div class="resume-highlights">
+    <div class="highlight-item">
+      <span class="highlight-icon"><i class="fas fa-car"></i></span>
+      <div class="highlight-text">
+        Digital Instrument Cluster – Dena
+        <small>Lead engineer: bootloader, CAN update, Qt UI</small>
+      </div>
+    </div>
+    <div class="highlight-item">
+      <span class="highlight-icon"><i class="fas fa-network-wired"></i></span>
+      <div class="highlight-text">
+        Dual-Bus CAN Analyzer
+        <small>MS-CAN / HS-CAN with C# PC app & diagnostics</small>
+      </div>
+    </div>
+    <div class="highlight-item">
+      <span class="highlight-icon"><i class="fas fa-industry"></i></span>
+      <div class="highlight-text">
+        Sensor Calibration Production Line
+        <small>Full automation for pressure sensors: hardware + C#</small>
+      </div>
+    </div>
+    <div class="highlight-item">
+      <span class="highlight-icon"><i class="fas fa-microchip"></i></span>
+      <div class="highlight-text">
+        STM32 / ESP32 / i.MX6UL
+        <small>Low-level, Linux embedded, and RTOS-based systems</small>
+      </div>
+    </div>
+    <div class="highlight-item">
+      <span class="highlight-icon"><i class="fas fa-rotate-left"></i></span>
+      <div class="highlight-text">
+        Reverse Engineering
+        <small>PCB extraction, firmware analysis, protocol decoding</small>
+      </div>
+    </div>
+    <div class="highlight-item">
+      <span class="highlight-icon"><i class="fab fa-android"></i></span>
+      <div class="highlight-text">
+        Android & C# & Qt Development
+        <small>Mobile apps, desktop software, cross-platform GUIs</small>
+      </div>
+    </div>
+    <div class="highlight-item">
+      <span class="highlight-icon"><i class="fas fa-graduation-cap"></i></span>
+      <div class="highlight-text">
+        MSc in Nuclear Engineering
+        <small>Amirkabir University of Technology · 2016–2019</small>
+      </div>
+    </div>
+    <div class="highlight-item">
+      <span class="highlight-icon"><i class="fas fa-print"></i></span>
+      <div class="highlight-text">
+        3D Printing & Laser Engraving
+        <small>Delta printer, laser cutter, SolidWorks, CAD</small>
+      </div>
+    </div>
+  </div>
+
+  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 30px;">
+    <div style="background: var(--ink); padding: 24px; border-radius: var(--radius); border: 1px solid var(--line);">
+      <h4 style="color: var(--violet); margin-bottom: 12px;"><i class="fas fa-briefcase"></i> Current Role</h4>
+      <p><strong>Arg Telecom</strong> — Automotive R&D Engineer (2022–Present)</p>
+      <p style="color: var(--paper-dim); font-size: 0.9rem; margin-top: 8px;">Automotive research and development focused on digital instrument clusters and embedded automotive electronics.</p>
+    </div>
+    <div style="background: var(--ink); padding: 24px; border-radius: var(--radius); border: 1px solid var(--line);">
+      <h4 style="color: var(--coral); margin-bottom: 12px;"><i class="fas fa-tools"></i> Core Competencies</h4>
+      <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+        <span class="tech-tag">STM32</span>
+        <span class="tech-tag">CAN Bus</span>
+        <span class="tech-tag">C/C++</span>
+        <span class="tech-tag">Android</span>
+        <span class="tech-tag">C#</span>
+        <span class="tech-tag">Qt</span>
+        <span class="tech-tag">Linux Embedded</span>
+        <span class="tech-tag">Bootloaders</span>
+        <span class="tech-tag">UART/SPI/I2C</span>
+        <span class="tech-tag">Git/GitLab</span>
+        <span class="tech-tag">SolidWorks</span>
+        <span class="tech-tag">3D Printing</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT CTA -->
+<section id="contact">
+  <div class="contact-cta">
+    <div>
+      <h2>Let's build something<br>extraordinary together.</h2>
+      <p style="color: var(--ink); opacity: 0.8; margin-top: 8px;">Open to EU relocation · Available for Automotive Embedded / R&D roles</p>
+    </div>
+    <div style="display: flex; gap: 16px; flex-wrap: wrap;">
+      <a href="mailto:maghrebimorteza@gmail.com" class="btn" style="background: var(--ink); color: var(--paper);">📧 Email Me</a>
+      <a href="#" class="btn" style="background: var(--paper); color: var(--ink);">📄 Download CV</a>
+    </div>
+  </div>
+
+  <div style="display: flex; flex-wrap: wrap; gap: 40px; margin-top: 40px; justify-content: space-between;">
+    <div>
+      <h4 style="color: var(--violet); margin-bottom: 12px;"><i class="fas fa-phone"></i> Contact</h4>
+      <p style="color: var(--paper-dim);">📧 maghrebimorteza@gmail.com</p>
+      <p style="color: var(--paper-dim);">📱 +98 915 882 0997</p>
+      <p style="color: var(--paper-dim);">📍 Tehran, Iran · Open to EU</p>
+    </div>
+    <div>
+      <h4 style="color: var(--violet); margin-bottom: 12px;"><i class="fas fa-share-alt"></i> Connect</h4>
+      <div style="display: flex; gap: 16px;">
+        <a href="#" style="color: var(--paper-dim); transition: 0.3s;"><i class="fab fa-linkedin"></i> LinkedIn</a>
+        <a href="#" style="color: var(--paper-dim); transition: 0.3s;"><i class="fab fa-github"></i> GitHub</a>
+        <a href="#" style="color: var(--paper-dim); transition: 0.3s;"><i class="fab fa-youtube"></i> YouTube</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span>© 2026 Morteza Maghrebi · Automotive Embedded & R&D Engineer</span>
+  <span>Built with <span class="highlight">precision</span> · Hamburg · Remote</span>
+</footer>
+
+<!-- Font Awesome & Three.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+// ----- POPULATE PRODUCTS (Shop) -----
+const products = [
+  // 3D printed products
+  { name: 'Hexagon Phone Stand', cat: '3D Printed', price: 29.90, rating: 4.8, img: '📱' },
+  { name: 'Ergonomic Controller Grip', cat: '3D Printed', price: 39.90, rating: 4.9, img: '🎮' },
+  { name: 'Modular Desk Organizer', cat: '3D Printed', price: 49.90, rating: 4.7, img: '📦' },
+  { name: 'Custom Keyboard Wrist Rest', cat: '3D Printed', price: 34.90, rating: 4.6, img: '⌨️' },
+  { name: 'LED Diffuser Lamp', cat: '3D Printed', price: 59.90, rating: 4.8, img: '💡' },
+  { name: 'Drone Propeller Guard', cat: '3D Printed', price: 19.90, rating: 4.5, img: '🛸' },
+  { name: 'Cable Management Box', cat: '3D Printed', price: 24.90, rating: 4.4, img: '🔌' },
+  { name: 'Tablet Stand Pro', cat: '3D Printed', price: 44.90, rating: 4.9, img: '📟' },
+  // Electronics kits
+  { name: 'DIY Synth Kit', cat: 'Electronics', price: 89.90, rating: 4.9, img: '🎛️' },
+  { name: 'Arduino Robotics Kit', cat: 'Electronics', price: 129.90, rating: 4.8, img: '🤖' },
+  { name: 'Smart Home Sensor Pack', cat: 'Electronics', price: 79.90, rating: 4.7, img: '🏠' },
+  { name: 'Motor Driver Shield', cat: 'Electronics', price: 39.90, rating: 4.6, img: '⚡' },
+  // Accessories
+  { name: 'Phone Stand + Charger', cat: 'Accessories', price: 34.90, rating: 4.8, img: '🔋' },
+  { name: 'Controller Wall Mount', cat: 'Accessories', price: 19.90, rating: 4.5, img: '🎯' },
+  { name: 'Cable Organizer', cat: 'Accessories', price: 14.90, rating: 4.3, img: '🔗' },
+  { name: 'Laptop Stand Pro', cat: 'Accessories', price: 49.90, rating: 4.7, img: '💻' },
+];
+
+const grid = document.getElementById('productGrid');
+products.forEach(p => {
+  const card = document.createElement('div');
+  card.className = 'product-card';
+  card.innerHTML = `
+    <div class="product-img" style="background: linear-gradient(145deg, #1e1d2b, #13121e);">${p.img}</div>
+    <div class="product-category">${p.cat}</div>
+    <div class="product-name">${p.name}</div>
+    <div class="product-price">€${p.price.toFixed(2)}</div>
+    <div class="product-rating">★ ${p.rating} (24)</div>
+    <button class="btn-add">Add to Cart</button>
+  `;
+  grid.appendChild(card);
+});
+
+// ----- 3D DNA ORBIT -----
+(function(){
+  const canvas = document.getElementById('dna-canvas');
+  if(!canvas || typeof THREE === 'undefined') return;
+  const section = document.getElementById('orbit');
+  const progressBar = document.getElementById('orbitProgressBar');
+  const countLabel = document.getElementById('orbitCount');
+
+  const projects = [
+    {name:'INSTRUMENT CLUSTER', tag:'AUTOMOTIVE', c1:'#7c5cff', c2:'#d4ff3d'},
+    {name:'CAN ANALYZER', tag:'DIAGNOSTICS', c1:'#ff5470', c2:'#7c5cff'},
+    {name:'PCB DESIGN', tag:'ELECTRONICS', c1:'#3a2d80', c2:'#ff5470'},
+    {name:'LASER CUT', tag:'MANUFACTURING', c1:'#1c3b2c', c2:'#d4ff3d'},
+    {name:'SENSOR CALIBRATION', tag:'INDUSTRIAL', c1:'#7a1f33', c2:'#ff5470'},
+    {name:'VANET SIMULATION', tag:'NETWORKING', c1:'#23204a', c2:'#7c5cff'},
+    {name:'BOOTLOADER', tag:'FIRMWARE', c1:'#264a3d', c2:'#5dcaa5'},
+    {name:'3D PRINTER', tag:'MECHANICAL', c1:'#4a1b0c', c2:'#f0997b'},
+    {name:'REVERSE ENGINEERING', tag:'ANALYSIS', c1:'#171622', c2:'#7c5cff'},
+    {name:'LINUX EMBEDDED', tag:'SYSTEMS', c1:'#5a2330', c2:'#ff5470'},
+    {name:'QT UI', tag:'SOFTWARE', c1:'#1e2a3a', c2:'#d4ff3d'},
+    {name:'ANDROID APP', tag:'MOBILE', c1:'#3d1f2a', c2:'#7c5cff'},
+  ];
+
+  function makeCardTexture(p){
+    const w=512, h=640;
+    const cv = document.createElement('canvas');
+    cv.width=w; cv.height=h;
+    const ctx=cv.getContext('2d');
+    const grad=ctx.createLinearGradient(0,0,w,h);
+    grad.addColorStop(0, p.c1); grad.addColorStop(1, p.c2);
+    ctx.fillStyle=grad; ctx.fillRect(0,0,w,h);
+    ctx.fillStyle='rgba(10,10,15,0.2)'; ctx.fillRect(0,h*0.7,w,h*0.3);
+    ctx.fillStyle='rgba(244,242,236,0.9)';
+    ctx.font='500 20px JetBrains Mono, monospace';
+    ctx.fillText(p.tag, 32, h*0.78);
+    ctx.fillStyle='#f4f2ec';
+    ctx.font='700 40px Bricolage Grotesque, sans-serif';
+    const words=p.name.split(' '); let line='', lines=[];
+    for(let n=0;n<words.length;n++){ const test=line+words[n]+' '; if(ctx.measureText(test).width > w-64 && n>0){ lines.push(line); line=words[n]+' '; } else line=test; }
+    lines.push(line);
+    const startY = h*0.88 - (lines.length-1)*25;
+    lines.forEach((l,i)=> ctx.fillText(l.trim(), 32, startY+i*45));
+    return new THREE.CanvasTexture(cv);
+  }
+
+  let width = canvas.clientWidth || window.innerWidth;
+  let height = canvas.clientHeight || window.innerHeight;
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(45, width/height, 0.1, 1000);
+  camera.position.set(0, 0, 36);
+
+  const renderer = new THREE.WebGLRenderer({canvas, antialias:true, alpha:true});
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  renderer.setSize(width, height);
+
+  // STARFIELD
+  const starGeo = new THREE.BufferGeometry();
+  const starCount = 2800;
+  const starPos = new Float32Array(starCount * 3);
+  const starCol = new Float32Array(starCount * 3);
+  for(let i=0; i<starCount; i++){
+    const r = 30 + Math.random()*70;
+    const theta = Math.random() * Math.PI * 2;
+    const phi = Math.acos(2*Math.random()-1);
+    starPos[i*3] = r * Math.sin(phi) * Math.cos(theta);
+    starPos[i*3+1] = r * Math.cos(phi) * 0.8;
+    starPos[i*3+2] = r * Math.sin(phi) * Math.sin(theta) - 10;
+    const c = new THREE.Color().setHSL(0.6 + Math.random()*0.3, 0.8, 0.5+Math.random()*0.4);
+    starCol[i*3]=c.r; starCol[i*3+1]=c.g; starCol[i*3+2]=c.b;
+  }
+  starGeo.setAttribute('position', new THREE.BufferAttribute(starPos,3));
+  starGeo.setAttribute('color', new THREE.BufferAttribute(starCol,3));
+  const starMat = new THREE.PointsMaterial({ size: 0.25, vertexColors: true, transparent: true, opacity: 0.8, blending: THREE.AdditiveBlending });
+  const stars = new THREE.Points(starGeo, starMat);
+  scene.add(stars);
+
+  // DNA helix
+  const helixGroup = new THREE.Group();
+  scene.add(helixGroup);
+  const N=140, TURNS=5, RAD=6.8, HEIGHT=48;
+  const colA=new THREE.Color('#7c5cff'), colB=new THREE.Color('#ff5470');
+  const strand1=[], strand2=[];
+  const pos=[], col=[];
+  for(let i=0;i<N;i++){
+    const t=i/(N-1), angle=t*Math.PI*2*TURNS, y=t*HEIGHT-HEIGHT/2;
+    const x1=RAD*Math.cos(angle), z1=RAD*Math.sin(angle);
+    const x2=RAD*Math.cos(angle+Math.PI), z2=RAD*Math.sin(angle+Math.PI);
+    strand1.push(new THREE.Vector3(x1,y,z1));
+    strand2.push(new THREE.Vector3(x2,y,z2));
+    pos.push(x1,y,z1, x2,y,z2);
+    col.push(colA.r,colA.g,colA.b, colB.r,colB.g,colB.b);
+  }
+  const dotGeo = new THREE.BufferGeometry();
+  dotGeo.setAttribute('position', new THREE.Float32BufferAttribute(pos,3));
+  dotGeo.setAttribute('color', new THREE.Float32BufferAttribute(col,3));
+  const dotCanvas = document.createElement('canvas');
+  dotCanvas.width=64; dotCanvas.height=64;
+  const dctx=dotCanvas.getContext('2d');
+  const rg=dctx.createRadialGradient(32,32,0,32,32,32);
+  rg.addColorStop(0,'rgba(255,255,255,1)'); rg.addColorStop(0.5,'rgba(255,255,255,0.9)'); rg.addColorStop(1,'rgba(255,255,255,0)');
+  dctx.fillStyle=rg; dctx.fillRect(0,0,64,64);
+  const dotTex=new THREE.CanvasTexture(dotCanvas);
+  const dotMat=new THREE.PointsMaterial({ size:0.9, map:dotTex, vertexColors:true, transparent:true, blending:THREE.AdditiveBlending });
+  const dots=new THREE.Points(dotGeo, dotMat);
+  helixGroup.add(dots);
+
+  // rungs
+  const rungPos=[];
+  for(let i=0;i<N;i+=3){ const a=strand1[i], b=strand2[i]; rungPos.push(a.x,a.y,a.z, b.x,b.y,b.z); }
+  const rungGeo=new THREE.BufferGeometry(); rungGeo.setAttribute('position', new THREE.Float32BufferAttribute(rungPos,3));
+  const rungMat=new THREE.LineBasicMaterial({color:0x534ab7, transparent:true, opacity:0.15});
+  const rungs=new THREE.LineSegments(rungGeo, rungMat);
+  helixGroup.add(rungs);
+
+  // orbiting cards
+  const imgGroup = new THREE.Group();
+  scene.add(imgGroup);
+  const cardMeshes=[];
+  const ORBIT_R=18;
+  projects.forEach((p,i)=>{
+    const tex=makeCardTexture(p);
+    const mat=new THREE.MeshBasicMaterial({map:tex, transparent:true, side:THREE.DoubleSide, depthWrite:false});
+    const geo=new THREE.PlaneGeometry(5.6, 7.0);
+    const mesh=new THREE.Mesh(geo, mat);
+    const angle=(i/projects.length)*Math.PI*2;
+    const y=(i/(projects.length-1))*HEIGHT*0.7 - HEIGHT*0.35;
+    mesh.userData.angle=angle; mesh.userData.y=y; mesh.userData.radius=ORBIT_R + (i%2===0?0:1.8);
+    mesh.position.set(Math.cos(angle)*mesh.userData.radius, y, Math.sin(angle)*mesh.userData.radius);
+    imgGroup.add(mesh);
+    cardMeshes.push(mesh);
+  });
+
+  // dust
+  const dustGeo=new THREE.BufferGeometry();
+  const dustPos=[]; for(let i=0;i<300;i++){ dustPos.push((Math.random()-0.5)*100,(Math.random()-0.5)*80,(Math.random()-0.5)*60-10); }
+  dustGeo.setAttribute('position', new THREE.Float32BufferAttribute(dustPos,3));
+  const dustMat=new THREE.PointsMaterial({size:0.12, color:0x4a4860, transparent:true, opacity:0.4});
+  scene.add(new THREE.Points(dustGeo, dustMat));
+
+  let scrollProgress=0, activeIndex=0;
+  function computeProgress(){
+    const rect=section.getBoundingClientRect();
+    const total=rect.height-window.innerHeight;
+    if(total<=0){ scrollProgress=0; return; }
+    scrollProgress=Math.min(Math.max(-rect.top/total,0),1);
+  }
+  window.addEventListener('scroll', computeProgress, {passive:true});
+  computeProgress();
+
+  function resize(){
+    width=canvas.clientWidth||window.innerWidth; height=canvas.clientHeight||window.innerHeight;
+    camera.aspect=width/height; camera.updateProjectionMatrix();
+    renderer.setSize(width,height,false);
+  }
+  window.addEventListener('resize', resize);
+  resize();
+
+  let t0=performance.now();
+  function animate(now){
+    const dt=Math.min((now-t0)/1000,0.05); t0=now;
+    const idleSpin=now*0.00006;
+    helixGroup.rotation.y=idleSpin + scrollProgress*Math.PI*4;
+    helixGroup.position.y=(0.5-scrollProgress)*12;
+
+    imgGroup.rotation.y=-idleSpin*0.5 - scrollProgress*Math.PI*2.8;
+    imgGroup.position.y=helixGroup.position.y;
+    cardMeshes.forEach(m=>{ m.lookAt(camera.position); });
+
+    camera.position.z=36 - scrollProgress*14;
+    camera.position.y=(scrollProgress-0.5)*8;
+    camera.lookAt(0, helixGroup.position.y*0.3,0);
+
+    progressBar.style.width=(scrollProgress*100).toFixed(1)+'%';
+    const idx=Math.min(projects.length-1, Math.floor(scrollProgress*projects.length));
+    if(idx!==activeIndex){ activeIndex=idx; countLabel.textContent=String(idx+1).padStart(2,'0')+' / '+String(projects.length).padStart(2,'0'); }
+
+    renderer.render(scene, camera);
+    requestAnimationFrame(animate);
+  }
+  requestAnimationFrame(animate);
+})();
+
+// ----- Accordion -----
+document.querySelectorAll('.accordion-header').forEach(header => {
+  header.addEventListener('click', function() {
+    const accordionItem = this.parentElement;
+    const isActive = accordionItem.classList.contains('active');
+    document.querySelectorAll('.accordion-item').forEach(item => {
+      item.classList.remove('active');
+    });
+    if (!isActive) {
+      accordionItem.classList.add('active');
+    }
+  });
+});
+
+// ----- Scroll reveal -----
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(en => {
+    if (en.isIntersecting) {
+      en.target.classList.add('in');
+    }
+  });
+}, { threshold: 0.15 });
+
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+document.querySelectorAll('.section-head, .service-card, .product-card, .accordion-item, .highlight-item, .contact-cta, .upload-section').forEach(el => {
+  el.classList.add('reveal');
+  io.observe(el);
+});
+
+// ----- Upload area interaction (demo) -----
+const uploadArea = document.querySelector('.upload-area');
+if (uploadArea) {
+  uploadArea.addEventListener('click', function() {
+    alert('File upload dialog would open here.\nSupported: STL, STEP, DXF, SVG, AI, OBJ, 3MF');
+  });
+}
+</script>
+</body>
+</html>
